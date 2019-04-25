@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form Validation using Javascript</title>
+    <link rel="stylesheet" href="./content/bootstrap.4.3.1/content/Content/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form method="GET" action="#" onsubmit="return Validation('user_img');">
+        <div class="container">
+                <h1>Fill in the details.</h1>
+                <br>
+            <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First name" id="firstName" onchange="checkForFirstName();" onblur="checkForFirstName();">
+              <div id="fe" class="error hidden">Enter Your First Name</div>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" id="lastName" onchange="checkForLastName();" onblur="checkForLastName();">
+            <div id="le" class="error hidden">Enter Your Last Name</div>
+          </div>
+        </div>
+        <br>
+        <fieldset class="form-group">
+                <div class="row">
+                  <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="option1" onchange="validateRadios();">
+                          <label class="form-check-label" for="gridRadios1">
+                            Male
+                          </label>
+                        </div>
+                    </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="option2" onchange="validateRadios();">
+                          <label class="form-check-label" for="gridRadios2">
+                            Female
+                          </label>
+                        </div>
+                      </div>
+                      <div id="re" class="error hidden">Check a radio button</div>
+              </fieldset>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" onblur="validateEmail();" onchange="validateEmail();">
+            <div id="ee" class="error hidden">Enter a valid email</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+                <label for="psw">Password</label>
+              <input type="password" id="psw" class="form-control" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onblur="checkPwd();">
+              <div id="pw" class="error hidden">Enter Password</div>
+              <div class="form-group col-md-2">
+                <p id="validity"></p>
+              </div>
+            <div id="message">
+              <h3>Password must contain the following:</h3>
+              <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+              <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+              <p id="number" class="invalid">A <b>number</b></p>
+              <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </div> 
+          </div>
+          <div class="form-group col-md-6">
+                <label for="cpwd">Confirm Password</label>
+                <input type="password" class="form-control" id="cpwd" placeholder="Confirm Password" onblur="confirmPwd();" onchange="confirmPwd();">
+              <div id="cpe" class="error hidden">Passwords do not match</div>
+              </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">Phone Number</label>
+            <input type="text" class="form-control" id="phone" onchange="validatePhone();" onblur="validatePhone();">
+            <div id="pe" class="error hidden"></div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="city">City</label>
+            <select id="city" class="form-control" onchange="cityValidation();" onblur="cityValidation();">
+              <option selected>Choose...</option>
+              <option value="Abd">Abbotabad</option>
+              <option value="Bwl">Bahawalpur</option>
+              <option value="Cht">Chiniot</option>
+              <option value="Fsd">Faisalabad</option>
+              <option value="Hbd">Haiderabad</option>
+              <option value="Isl">Islamabad</option>
+              <option value="Kch">Karachi</option>
+              <option value="Lhr">Lahore</option>
+              <option value="Mlt">Multan</option>
+            </select>
+            <div id="ce" class="error hidden">Select a city.</div>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Zip Code</label>
+            <input type="text" class="form-control" id="zip" onchange="ValidateZIP();" onblur="ValidateZIP();">
+            <div id="ze" class="error hidden"></div>
+          </div>
+        </div>
+        <div class="form-group">
+                Upload Your Image
+                      <div class="col-md-10">
+                          <div>
+                              <img id="user_img"
+                                   height="130"
+                                   width="130"
+                                   style="border:solid" />
+                          </div>
+                          <div>
+                                <input type="file" title="search image" id="file" name="file" onchange="show(this);" />
+                          </div>
+                      </div>
+                  </div>
+        <div class="form-group">
+          <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck" onchange="validateCheckBox();" onblur="validateCheckBox();    ">
+            <label class="form-check-label" for="gridCheck">
+              I accept the Licence Agreement
+            </label>
+          </div>
+          <div id="cb" class="error hidden">Please accept the Licence Agreement by checking above box.</div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      <script src="./content/jQuery.3.3.1/Content/Scripts/jquery-3.3.1.js"></script>
+      <script src="script.js"></script>
+</body>
+</html>
